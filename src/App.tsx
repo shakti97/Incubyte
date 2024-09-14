@@ -15,7 +15,7 @@ function App(): JSX.Element {
     }
   };
   return (
-    <>
+    <div className="container">
       <h1>String Calculator</h1>
       <input
         type="text"
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         Calculate
       </button>
       <p data-testid="result">Result: {result} </p>
-    </>
+    </div>
   );
 }
 
