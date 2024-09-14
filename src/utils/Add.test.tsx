@@ -8,4 +8,8 @@ describe("Add function", () => {
   it('should return the number itself when a single number is passed', () => {
     expect(add('5')).toBe(5);
   });
+
+  it('should return the sum of n numbers separated by a comma', () => {
+    expect(add('1,2,4')).toBe(7);
+  });
 });
