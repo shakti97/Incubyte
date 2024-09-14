@@ -53,4 +53,22 @@ describe("String Calculator Component", () => {
     expect(add).toHaveBeenCalledWith("1,2,3");
     expect(screen.getByTestId("result")).toHaveTextContent("Result: 6");
   });
+
+  test("handles errors gracefully and displays error message", () => {
+    (add as jest.Mock).mockImplementation(() => {
+      throw new Error("negative numbers not allowed -1, -2, -3");
+    });
+
+    render(<App />);
+    const inputElement = screen.getByTestId("input");
+    const buttonElement = screen.getByTestId("calculate");
+
+    fireEvent.change(inputElement, { target: { value: "-1,-2,-3" } });
+    fireEvent.click(buttonElement);
+
+    expect(add).toHaveBeenCalledWith("-1,-2,-3");
+    expect(screen.getByTestId("result")).toHaveTextContent(
+      "negative numbers not allowed -1, -2, -3"
+    );
+  });
 });
