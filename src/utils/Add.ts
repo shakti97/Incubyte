@@ -4,24 +4,23 @@ function add(input: string): number {
   }
 
   // default delimiter is a regular expression that matches a comma or a new line character
-  let delimiter = /,|\n/;
+  let delimiter: RegExp | string = /,|\n/;
 
-  if (input.startsWith("//")) {
+  if (input.trim().startsWith("//")) {
     // extract the delimiter from the input string
-    const delimiterSection = input.match(/^\/\/(.*)\n/);
+    const delimiterSection = input.match(/^\/\/(.+)\n/);
     if (delimiterSection !== null) {
-      delimiter = new RegExp(delimiterSection[1]);
+      delimiter = delimiterSection[1];
       input = input.slice(delimiterSection[0].length);
     }
   }
 
   // split the input string by the delimiter and convert each element to a number
   const numArray = input.split(delimiter).map(Number);
-
   // throw an error if any of the numbers are negative
   if (numArray.some((num) => num < 0)) {
     throw new Error(
-      `"negative numbers not allowed ${numArray
+      `negative numbers not allowed ${numArray
         .filter((n) => n < 0)
         .join(", ")}`
     );
