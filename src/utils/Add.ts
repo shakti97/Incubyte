@@ -1,6 +1,6 @@
 function add(input: string): number {
-  // delimiter is a regular expression that matches a comma
-  const delimiter = /,/;
+  // delimiter is a regular expression that matches a comma or a new line character
+  const delimiter = /,|\n/;
   // split the input string by the delimiter and convert each element to a number
   const numArray = input.split(delimiter).map(Number);
   console.log('numArray', numArray);

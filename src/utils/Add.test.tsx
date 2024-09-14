@@ -12,4 +12,8 @@ describe("Add function", () => {
   it('should return the sum of n numbers separated by a comma', () => {
     expect(add('1,2,4')).toBe(7);
   });
+
+  it('should return the sum of n numbers separated by a comma & new line character', () => {
+    expect(add("1\n2,3")).toBe(6);
+  });
 });
