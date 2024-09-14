@@ -1,5 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
+import { add } from "./utils/Add";
+
+jest.mock("./utils/Add", () => ({
+  add: jest.fn(() => 6),
+}));
 
 describe("String Calculator Component", () => {
   it("should render the component", () => {
@@ -37,4 +42,15 @@ describe("String Calculator Component", () => {
     expect(inputElement).toHaveValue("1,2,3");
   });
 
+  test("calls add function and displays result on button click", () => {
+    render(<App />);
+    const inputElement = screen.getByTestId("input");
+    const buttonElement = screen.getByTestId("calculate");
+
+    fireEvent.change(inputElement, { target: { value: "1,2,3" } });
+    fireEvent.click(buttonElement);
+
+    expect(add).toHaveBeenCalledWith("1,2,3");
+    expect(screen.getByTestId("result")).toHaveTextContent("Result: 6");
+  });
 });
