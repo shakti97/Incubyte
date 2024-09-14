@@ -18,8 +18,8 @@ function add(input: string): number {
   // split the input string by the delimiter and convert each element to a number
   const numArray = input.split(delimiter).map(Number);
 
+  // throw an error if any of the numbers are negative
   if (numArray.some((num) => num < 0)) {
-    console.log("gg");
     throw new Error(
       `"negative numbers not allowed ${numArray
         .filter((n) => n < 0)
