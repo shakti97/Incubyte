@@ -20,6 +20,7 @@ describe("Add function", () => {
   it("should handle custom delimiters", () => {
     expect(add("//;\n1;2")).toBe(3);
     expect(add("//:\n1:2:3")).toBe(6);
+    expect(add("//+\n1+2+3")).toBe(6);
   });
 
   it("should throw an error when negative numbers are present", () => {
