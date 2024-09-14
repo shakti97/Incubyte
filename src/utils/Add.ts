@@ -6,18 +6,26 @@ function add(input: string): number {
   // default delimiter is a regular expression that matches a comma or a new line character
   let delimiter = /,|\n/;
 
-  if(input.startsWith('//')) {
+  if (input.startsWith("//")) {
     // extract the delimiter from the input string
     const delimiterSection = input.match(/^\/\/(.*)\n/);
-    if(delimiterSection !== null) {
+    if (delimiterSection !== null) {
       delimiter = new RegExp(delimiterSection[1]);
-      input=input.slice(delimiterSection[0].length);
+      input = input.slice(delimiterSection[0].length);
     }
   }
 
   // split the input string by the delimiter and convert each element to a number
   const numArray = input.split(delimiter).map(Number);
-  console.log('numArray', numArray);
+
+  if (numArray.some((num) => num < 0)) {
+    console.log("gg");
+    throw new Error(
+      `"negative numbers not allowed ${numArray
+        .filter((n) => n < 0)
+        .join(", ")}`
+    );
+  }
   // return the sum of the numbers in the array using the reduce method
   return numArray.reduce((sum, num) => sum + num, 0);
 }
