@@ -17,8 +17,7 @@ function App(): JSX.Element {
   return (
     <div className="container">
       <h1>String Calculator</h1>
-      <input
-        type="text"
+      <textarea
         value={input}
         data-testid="input"
         placeholder="Enter numbers"
